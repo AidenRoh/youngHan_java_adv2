@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
 
-import static java.nio.charset.StandardCharsets.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class ReadTextFileV1 {
+public class ReadTextFileV2 {
 
     private static final String PATH = "temp/hello2.txt";
 
@@ -23,8 +25,16 @@ public class ReadTextFileV1 {
 
         // 파일에서 읽기
         System.out.println("== Read String ==");
+        Stream<String> lineStream = Files.lines(path, UTF_8);
+        lineStream.forEach(System.out::println);
+        lineStream.close();
+/*
+        List<String> lines = Files.readAllLines(path, UTF_8);
+        for (int i = 0; i < lines.size(); i++) {
+            System.out.println((i + 1) + ": " + lines.get(i));
+        }
+         System.out.println(readString);
+*/
 
-        String readString = Files.readString(path, UTF_8);
-        System.out.println(readString);
     }
 }
